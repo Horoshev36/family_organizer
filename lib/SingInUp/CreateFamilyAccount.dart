@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+var pass;
+
 class CustomTextStyle {
   static TextStyle headers(BuildContext context) {
     return new TextStyle(
@@ -53,13 +55,13 @@ class CreateFamilyAccountState extends State<CreateFamilyAccount> {
             child: new Column(
               children: <Widget>[
                 new Text(
-                  'Create your',
+                  'Создайте свой',
                   style: CustomTextStyle.headers(context),
                 ),
-                new Text('family account',
+                new Text('семейный аккаунт',
                     style: CustomTextStyle.headers(context)),
                 new SizedBox(
-                  height: 30.0,
+                  height: 40.0,
                 ),
                 new Card(
                   child: Column(
@@ -72,21 +74,27 @@ class CreateFamilyAccountState extends State<CreateFamilyAccount> {
                         child: Column(
                           children: <Widget>[
                             new Text(
-                              'ONE THING TO NOTE',
+                              'ВАЖНЫЙ МОМЕНТ',
                               style: TextStyle(
                                   fontSize: 20.0,
                                   fontWeight: FontWeight.bold,
                                   color: Color.fromRGBO(120, 120, 120, 0.8)),
                             ),
                             SizedBox(
-                              height: 15.0,
+                              height: 10.0,
                             ),
-                            new Text('Your family shares the same account,',
-                                style: toTextDescription(15.0, 73, 163, 72, 1)),
-                            new Text('so each person will use the email and',
-                                style: toTextDescription(15.0, 73, 163, 72, 1)),
-                            new Text('password to sing in.',
-                                style: toTextDescription(15.0, 73, 163, 72, 1))
+                            new Text('Вся семья использует одну и ту же ',
+                                style:
+                                    toTextDescription(15.0, 73, 163, 72, 0.7)),
+                            new Text('учетную запись, поэтому каждый будет',
+                                style:
+                                    toTextDescription(15.0, 73, 163, 72, 0.7)),
+                            new Text('использовать эту электронную почту и',
+                                style:
+                                    toTextDescription(15.0, 73, 163, 72, 0.7)),
+                            new Text('пароль для входа',
+                                style:
+                                    toTextDescription(15.0, 73, 163, 72, 0.7))
                           ],
                         ),
                       ),
@@ -100,10 +108,13 @@ class CreateFamilyAccountState extends State<CreateFamilyAccount> {
                                 MyForm(),
                               ],
                             )),
-                      )
+                      ),
                     ],
                   ),
                 ),
+                SizedBox(
+                  height: 90.0,
+                )
               ],
             ),
           ),
@@ -137,10 +148,10 @@ class _MyFormState extends State<MyForm> {
         children: <Widget>[
           TextFormField(
               decoration: InputDecoration(
-                labelText: 'Enter email',
+                labelText: 'Электронная почта',
                 labelStyle: TextStyle(
                     color: Colors.black26,
-                    fontSize: 25,
+                    fontSize: 23,
                     fontWeight: FontWeight.bold),
               ),
               style: TextStyle(
@@ -151,15 +162,15 @@ class _MyFormState extends State<MyForm> {
                   height: 1.2),
               // ignore: missing_return
               validator: (value) {
-                if (value.isEmpty) return 'Please input your name';
+                if (value.isEmpty) return 'Введите адрес электронной почты';
               }),
           TextFormField(
               obscureText: true,
               decoration: InputDecoration(
-                  labelText: 'Input password',
+                  labelText: 'Пароль',
                   labelStyle: TextStyle(
                       color: Colors.black26,
-                      fontSize: 25,
+                      fontSize: 23,
                       fontWeight: FontWeight.bold)),
               style: TextStyle(
                   fontSize: 20,
@@ -169,15 +180,16 @@ class _MyFormState extends State<MyForm> {
                   height: 1.2),
               // ignore: missing_return
               validator: (value) {
-                if (value.isEmpty) return 'Please input your name';
+                pass = value;
+                if (value.isEmpty) return 'Введите пароль для входа';
               }),
           TextFormField(
               obscureText: true,
               decoration: InputDecoration(
-                  labelText: 'Confirm password',
+                  labelText: 'Подтвердите пароль',
                   labelStyle: TextStyle(
                       color: Colors.black26,
-                      fontSize: 25,
+                      fontSize: 23,
                       fontWeight: FontWeight.bold)),
               style: TextStyle(
                   fontSize: 20,
@@ -188,7 +200,9 @@ class _MyFormState extends State<MyForm> {
 
               // ignore: missing_return
               validator: (value) {
-                if (value.isEmpty) return 'Please input your name';
+                if ((value.isEmpty) || (value != pass))
+                  return 'Подтвердите пароль';
+                //need to do normal
               }),
           SizedBox(
             height: 35,
